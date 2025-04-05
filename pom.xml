@@ -8,7 +8,7 @@
 		<version>3.3.0</version>
 		<relativePath/>
 	</parent>
-	<groupId>ar.edu.utn.frc.tup.lciii</groupId>
+	<groupId>project.financetrack</groupId>
 	<artifactId>FinanceTrack</artifactId>
 	<version>0.0.1</version>
 	<name>FinanceTrack</name>
