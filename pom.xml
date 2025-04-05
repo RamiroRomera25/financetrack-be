@@ -8,11 +8,11 @@
 		<version>3.3.0</version>
 		<relativePath/>
 	</parent>
-	<groupId>ar.edu.utn.frc.tup.lciii</groupId>
-	<artifactId>templateSpring</artifactId>
-	<version>v5</version>
-	<name>Generic CRUD</name>
-	<description>Generic CRUD :D</description>
+	<groupId>project.financetrack</groupId>
+	<artifactId>FinanceTrack</artifactId>
+	<version>0.0.1</version>
+	<name>FinanceTrack</name>
+	<description>Finance Track</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.3</spring-cloud.version>
@@ -78,36 +78,6 @@
 			<version>3.1.1</version>
 		</dependency>
 
-<!--		REACTIVE DEPENDENCIES -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-<!--		CIRCUIT BREAKER -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
-		</dependency>
-
-<!--		MONGO DB -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
-		</dependency>
-
-		<!-- MySQL Data Base dependency -->
-		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>8.0.33</version>
-		</dependency>
-
 		<!-- Driver de PostgreSQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -115,17 +85,65 @@
 			<version>42.7.4</version>
 		</dependency>
 
-<!--		<dependency>                                      -->
-<!--			<groupId>com.google.firebase</groupId>        -->
-<!--			<artifactId>firebase-admin</artifactId>       -->
-<!--			<version>9.4.1</version>                      -->
-<!--		</dependency>-->
 
-		<!-- MariaDB Database dependency -->
+		<!--    JUnit Core Dependency  -->
 		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>3.5.1</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.9.3</version>
+		</dependency>
+
+		<!-- Mockito Core Dependency -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.5.0</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- Mockito JUnit 5 Integration -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>5.5.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- JWT Dependency -->
+
+		<dependency>
+			<groupId>com.github.jtidy</groupId>
+			<artifactId>jtidy</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 
