@@ -14,6 +14,7 @@ import project.financetrack.dtos.user.UserDTOPost;
 import project.financetrack.dtos.user.login.LoginRequest;
 import project.financetrack.dtos.user.login.TokenResponse;
 import project.financetrack.services.AuthService;
+import project.financetrack.services.EmailService;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -21,6 +22,8 @@ import project.financetrack.services.AuthService;
 public class AuthController {
 
     private final AuthService authService;
+
+    private final EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody @Valid UserDTOPost request) {
@@ -38,6 +41,16 @@ public class AuthController {
     public ResponseEntity<Boolean> validEmail(@RequestParam("email") String email) {
         Boolean emailExists = this.authService.getEmailExists(email);
         return ResponseEntity.ok(emailExists);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> testMail(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("lastName") String lastName) {
+        UserDTO user = new UserDTO();
+        user.setEmail(email);
+        user.setFirstName(name);
+        user.setLastName(lastName);
+        emailService.welcomeMail(user);
+        return ResponseEntity.ok(true);
     }
 
 }

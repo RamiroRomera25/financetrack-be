@@ -47,7 +47,7 @@ public class EmailServiceImpl implements EmailService {
 
         Map<String, String> variables = new HashMap<>();
 
-        variables.put("fullName", user.getFirstName() + user.getLastName());
+        variables.put("fullName", user.getFirstName() + " " + user.getLastName());
 
         createEmailDTO.setVariables(variables);
         this.sendEmailWithTemplate(createEmailDTO);
