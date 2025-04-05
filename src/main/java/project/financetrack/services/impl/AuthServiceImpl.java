@@ -9,17 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import project.financetrack.dtos.user.UserDTO;
 import project.financetrack.dtos.user.UserDTOPost;
-import project.financetrack.dtos.user.login.ChangePasswordRequest;
 import project.financetrack.dtos.user.login.LoginRequest;
 import project.financetrack.dtos.user.login.TokenResponse;
 import project.financetrack.entities.UserEntity;
 import project.financetrack.repositories.UserRepository;
 import project.financetrack.security.jwt.JwtService;
 import project.financetrack.services.AuthService;
-import project.financetrack.services.UserService;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

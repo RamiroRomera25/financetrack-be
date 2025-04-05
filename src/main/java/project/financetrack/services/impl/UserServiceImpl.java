@@ -2,7 +2,6 @@ package project.financetrack.services.impl;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.user.UserDTO;
 import project.financetrack.entities.UserEntity;

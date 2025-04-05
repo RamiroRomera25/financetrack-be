@@ -6,8 +6,6 @@ import project.financetrack.dtos.dummy.DummyDtoPost;
 import project.financetrack.dtos.dummy.DummyDtoPut;
 import project.financetrack.entities.DummyEntity;
 import project.financetrack.models.DummyModel;
-import project.financetrack.services.genericSegregation.filters.ServiceGetAllListFilter;
-import project.financetrack.services.genericSegregation.filters.ServiceGetAllPageFilter;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceCreate;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceCreateList;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceGetAllList;
@@ -16,6 +14,8 @@ import project.financetrack.services.genericSegregation.basicCRUD.ServiceGetById
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceSoftDelete;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceSoftDeleteList;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceUpdate;
+import project.financetrack.services.genericSegregation.filters.ServiceGetAllListFilter;
+import project.financetrack.services.genericSegregation.filters.ServiceGetAllPageFilter;
 
 import java.util.List;
 

@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import project.financetrack.entities.UserEntity;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
  * This class is returned by the user endpoint.
  */

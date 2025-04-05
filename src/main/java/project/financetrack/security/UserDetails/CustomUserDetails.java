@@ -2,12 +2,10 @@ package project.financetrack.security.UserDetails;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import project.financetrack.dtos.user.UserDTO;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 /**
  * Clase que representa los detalles de un usuario.
