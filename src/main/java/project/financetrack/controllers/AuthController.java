@@ -42,16 +42,5 @@ public class AuthController {
         Boolean emailExists = this.authService.getEmailExists(email);
         return ResponseEntity.ok(emailExists);
     }
-
-    @PostMapping
-    public ResponseEntity<?> testMail(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("lastName") String lastName) {
-        UserDTO user = new UserDTO();
-        user.setEmail(email);
-        user.setFirstName(name);
-        user.setLastName(lastName);
-        emailService.welcomeMail(user);
-        return ResponseEntity.ok(true);
-    }
-
 }
 
