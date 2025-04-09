@@ -38,7 +38,6 @@ public class EmailServiceImpl implements EmailService {
     @Value("${mail.message.welcome}")
     private String EMAIL_WELCOME;
 
-
     @Override
     public void welcomeMail(UserDTO user) {
         CreateEmailDTO createEmailDTO = new CreateEmailDTO();

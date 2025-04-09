@@ -35,7 +35,7 @@ public class CustomDataSourceInitializer {
         DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);
 
-        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM dummy", Integer.class);
+        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
         if (count == 0) {
             initializer.setDatabasePopulator(new ResourceDatabasePopulator(dataScript));
         }
