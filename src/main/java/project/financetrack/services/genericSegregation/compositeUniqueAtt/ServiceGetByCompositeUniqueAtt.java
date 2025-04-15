@@ -6,6 +6,7 @@ import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 
 import java.util.Map;
+import java.util.Optional;
 
 public interface ServiceGetByCompositeUniqueAtt<E, I, M> {
     ModelMapper getMapper();
@@ -21,6 +22,10 @@ public interface ServiceGetByCompositeUniqueAtt<E, I, M> {
     default E getByCompositeUniqueFields(Map<String, Object> uniqueFields) {
         return getRepository().findOne(specificationBuilder().compositeUniqueValues(uniqueFields).build())
                 .orElseThrow(() -> new EntityNotFoundException(buildErrorMessage(uniqueFields)));
+    }
+
+    default Optional<E> getOptionalByCompositeUniqueFields(Map<String, Object> uniqueFields) {
+        return getRepository().findOne(specificationBuilder().compositeUniqueValues(uniqueFields).build());
     }
 
     default M getModelByCompositeUniqueFields(Map<String, Object> uniqueFields) {

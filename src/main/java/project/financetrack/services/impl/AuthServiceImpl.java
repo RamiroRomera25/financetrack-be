@@ -15,20 +15,24 @@ import project.financetrack.entities.UserEntity;
 import project.financetrack.repositories.UserRepository;
 import project.financetrack.security.jwt.JwtService;
 import project.financetrack.services.AuthService;
+import project.financetrack.services.EmailService;
+import project.financetrack.services.UserService;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+    private final UserService userService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final EmailService emailService;
 
     public UserDTO register(UserDTOPost post) {
 
-        if (userRepository.findByEmail(post.getEmail()).isPresent()) {
+        if (userService.getOptionalByUniqueField("email", post.getEmail()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use.");
         }
 
@@ -36,7 +40,11 @@ public class AuthServiceImpl implements AuthService {
         user.setIsActive(true);
         user.setPassword(passwordEncoder.encode(post.getPassword()));
 
-        return new UserDTO(userRepository.save(user));
+        UserDTO userDTO = new UserDTO(userRepository.save(user));
+
+        emailService.welcomeMail(userDTO);
+
+        return userDTO;
     }
 
     public TokenResponse authenticate(LoginRequest request) {
@@ -46,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
                         request.getPassword()
                 )
         );
-        UserEntity user = userRepository.findByEmail(request.getEmail())
+        UserEntity user = userService.getOptionalByUniqueField("email", request.getEmail())
                 .orElseThrow();
         String accessToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -55,7 +63,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Boolean getEmailExists(String email) {
-        Optional<UserEntity> userWithEmail = userRepository.findByEmail(email);
-        return !userWithEmail.isPresent();
+        return userService.getOptionalByUniqueField("email", email).isEmpty();
     }
 }

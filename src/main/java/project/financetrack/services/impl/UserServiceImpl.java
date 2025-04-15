@@ -19,8 +19,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final GenericSpecification<UserEntity> userSpecification;
-
     private final SpecificationBuilder<UserEntity> specificationBuilder;
 
     @Override
