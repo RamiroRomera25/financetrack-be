@@ -3,6 +3,7 @@ package project.financetrack.services.impl;
 import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import project.financetrack.dtos.category.CategoryDTOPost;
 import project.financetrack.dtos.project.ProjectDTOPost;
 import project.financetrack.entities.CategoryEntity;
@@ -17,7 +18,7 @@ import project.financetrack.services.ProjectService;
 
 import java.util.Map;
 
-@Server
+@Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 

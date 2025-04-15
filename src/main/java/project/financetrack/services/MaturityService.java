@@ -12,7 +12,6 @@ import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetByUn
 @Service
 public interface MaturityService extends
         ServiceCreate<MaturityEntity, Long, MaturityEntity, MaturityDTOPost>,
-        ServiceGetAllListFilter<MaturityEntity, Long, MaturityEntity, MaturityDTOFilter>,
         ServiceGetByUniqueAtt<MaturityEntity, Long, MaturityEntity>
 {
 

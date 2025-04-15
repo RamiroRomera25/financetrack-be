@@ -10,4 +10,5 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MaturityDTOFilter {
+    private String dummy;
 }
