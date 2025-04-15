@@ -30,10 +30,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final SpecificationBuilder<ProjectEntity> specificationBuilder;
 
-    @Override
-    public void importCategoriesToProject(Long projectSourceId, Long projectTargetId, Long userId) {
-
-    }
 
     @Override
     public ProjectEntity create(ProjectDTOPost dtoPost) {

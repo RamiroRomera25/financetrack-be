@@ -1,8 +1,8 @@
 package project.financetrack.enums;
 
 public enum MaturityState {
-    PAID,
-    HOLD,
+    SOLVED,
+    ON_WAIT,
     NOTIFICATED,
     LATE
 }

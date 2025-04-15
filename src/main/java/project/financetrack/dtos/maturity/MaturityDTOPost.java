@@ -17,6 +17,7 @@ import project.financetrack.entities.ProjectEntity;
 import project.financetrack.entities.base.BaseEntity;
 import project.financetrack.enums.MaturityState;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -25,7 +26,7 @@ import java.time.LocalDateTime;
 public class MaturityDTOPost {
     private Integer quantity;
 
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     private Long projectId;
 }

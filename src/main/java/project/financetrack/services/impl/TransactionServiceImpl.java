@@ -3,12 +3,14 @@ package project.financetrack.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import project.financetrack.dtos.transaction.TransactionDTOPost;
 import project.financetrack.entities.MaturityEntity;
 import project.financetrack.entities.TransactionEntity;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.MaturityRepository;
 import project.financetrack.repositories.TransactionRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
+import project.financetrack.services.CategoryService;
 import project.financetrack.services.TransactionService;
 
 @Service
@@ -19,7 +21,19 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
 
+    private final CategoryService categoryService;
+
     private final SpecificationBuilder<TransactionEntity> specificationBuilder;
+
+    @Override
+    public TransactionEntity create(TransactionDTOPost dtoPost) {
+        TransactionEntity transaction = TransactionEntity.builder()
+                .category(categoryService.getById(dtoPost.getCategoryId()))
+                .quantity(dtoPost.getQuantity())
+                .build();
+
+        return TransactionService.super.createWithEntity(transaction);
+    }
 
     @Override
     public ModelMapper getMapper() {

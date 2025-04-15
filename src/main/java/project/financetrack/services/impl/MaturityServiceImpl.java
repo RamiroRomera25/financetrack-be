@@ -3,8 +3,10 @@ package project.financetrack.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import project.financetrack.dtos.maturity.MaturityDTOPost;
 import project.financetrack.entities.MaturityEntity;
 import project.financetrack.entities.ProjectEntity;
+import project.financetrack.enums.MaturityState;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.MaturityRepository;
 import project.financetrack.repositories.ProjectRepository;
@@ -21,6 +23,17 @@ public class MaturityServiceImpl implements MaturityService {
     private final MaturityRepository maturityRepository;
 
     private final SpecificationBuilder<MaturityEntity> specificationBuilder;
+
+    @Override
+    public MaturityEntity create(MaturityDTOPost dtoPost) {
+        MaturityEntity maturity = MaturityEntity.builder()
+                .state(MaturityState.ON_WAIT)
+                .quantity(dtoPost.getQuantity())
+                .endDate(dtoPost.getEndDate())
+                .build();
+
+        return MaturityService.super.createWithEntity(maturity);
+    }
 
     @Override
     public ModelMapper getMapper() {
