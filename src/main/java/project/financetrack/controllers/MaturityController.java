@@ -49,7 +49,7 @@ public class MaturityController
     }
 
     @GetMapping("/project/{projectId}")
-    public List<MaturityEntity> getAllGoalsByProjectId(@PathVariable Long projectId, Authentication auth) {
+    public List<MaturityEntity> getAllMaturitiesByProjectId(@PathVariable Long projectId, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return maturityService.getAllByUniqueFields("project.id", projectId);
         } else {
@@ -58,19 +58,24 @@ public class MaturityController
     }
 
 
-    @DeleteMapping("/project/{projectId}")
-    public ResponseEntity<MaturityEntity> delete(@PathVariable Long projectId, Authentication auth) {
+    @DeleteMapping("/project/{projectId}/{maturityId}")
+    public ResponseEntity<MaturityEntity> delete(@PathVariable Long projectId,
+                                                 @PathVariable Long maturityId,
+                                                 Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(maturityService.delete(projectId));
+            return ResponseEntity.ok(maturityService.delete(maturityId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @PutMapping("/project/{projectId}")
-    public ResponseEntity<MaturityEntity> update(@PathVariable Long projectId, @RequestBody @Valid MaturityDTOPut dtoPut, Authentication auth) {
+    @PutMapping("/project/{projectId}/{maturityId}")
+    public ResponseEntity<MaturityEntity> update(@PathVariable Long projectId,
+                                                 @PathVariable Long maturityId,
+                                                 @RequestBody @Valid MaturityDTOPut dtoPut,
+                                                 Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(maturityService.update(dtoPut, projectId));
+            return ResponseEntity.ok(maturityService.update(dtoPut, maturityId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }

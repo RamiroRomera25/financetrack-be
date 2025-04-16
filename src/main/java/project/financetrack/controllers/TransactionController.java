@@ -49,7 +49,7 @@ public class TransactionController
     }
 
     @GetMapping("/project/{projectId}")
-    public List<TransactionEntity> getAllGoalsByProjectId(@PathVariable Long projectId, Authentication auth) {
+    public List<TransactionEntity> getAllTransactionsByProjectId(@PathVariable Long projectId, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return transactionService.getAllByUniqueFields("project.id", projectId);
         } else {
@@ -58,19 +58,24 @@ public class TransactionController
     }
 
 
-    @DeleteMapping("/project/{projectId}")
-    public ResponseEntity<TransactionEntity> delete(@PathVariable Long projectId, Authentication auth) {
+    @DeleteMapping("/project/{projectId}/{transactionId}")
+    public ResponseEntity<TransactionEntity> delete(@PathVariable Long projectId,
+                                                    @PathVariable Long transactionId,
+                                                    Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(transactionService.delete(projectId));
+            return ResponseEntity.ok(transactionService.delete(transactionId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @PutMapping("/project/{projectId}")
-    public ResponseEntity<TransactionEntity> update(@PathVariable Long projectId, @RequestBody @Valid TransactionDTOPut dtoPut, Authentication auth) {
+    @PutMapping("/project/{projectId}/{transactionId}")
+    public ResponseEntity<TransactionEntity> update(@PathVariable Long projectId,
+                                                    @PathVariable Long transactionId,
+                                                    @RequestBody @Valid TransactionDTOPut dtoPut,
+                                                    Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(transactionService.update(dtoPut, projectId));
+            return ResponseEntity.ok(transactionService.update(dtoPut, transactionId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }

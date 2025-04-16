@@ -50,7 +50,7 @@ public class InvestmentController
     }
 
     @GetMapping("/project/{projectId}")
-    public List<InvestmentEntity> getAllGoalsByProjectId(@PathVariable Long projectId, Authentication auth) {
+    public List<InvestmentEntity> getAllInvestmentsByProjectId(@PathVariable Long projectId, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return investmentService.getAllByUniqueFields("project.id", projectId);
         } else {
@@ -59,19 +59,24 @@ public class InvestmentController
     }
 
 
-    @DeleteMapping("/project/{projectId}")
-    public ResponseEntity<InvestmentEntity> delete(@PathVariable Long projectId, Authentication auth) {
+    @DeleteMapping("/project/{projectId}/{investmentId}")
+    public ResponseEntity<InvestmentEntity> delete(@PathVariable Long projectId,
+                                                   @PathVariable Long investmentId,
+                                                   Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(investmentService.delete(projectId));
+            return ResponseEntity.ok(investmentService.delete(investmentId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @PutMapping("/project/{projectId}")
-    public ResponseEntity<InvestmentEntity> update(@PathVariable Long projectId, @RequestBody @Valid InvestmentDTOPut dtoPut, Authentication auth) {
+    @PutMapping("/project/{projectId}/{investmentId}")
+    public ResponseEntity<InvestmentEntity> update(@PathVariable Long projectId,
+                                                   @PathVariable Long investmentId,
+                                                   @RequestBody @Valid InvestmentDTOPut dtoPut,
+                                                   Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(investmentService.update(dtoPut, projectId));
+            return ResponseEntity.ok(investmentService.update(dtoPut, investmentId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
