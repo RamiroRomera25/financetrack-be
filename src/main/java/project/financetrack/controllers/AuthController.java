@@ -23,8 +23,6 @@ public class AuthController {
 
     private final AuthService authService;
 
-    private final EmailService emailService;
-
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody @Valid UserDTOPost request) {
         return ResponseEntity.ok(authService.register(request));

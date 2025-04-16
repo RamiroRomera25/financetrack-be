@@ -154,13 +154,7 @@ public class GenericSpecification<E> {
     }
 
     public Specification<E> uniqueValue(String fieldName, Object value) {
-        return (root, query, criteriaBuilder) -> {
-            if (value == null) {
-                return null;
-            }
-            Path<?> path = getPath(root, fieldName);
-            return criteriaBuilder.equal(path, value);
-        };
+        return this.compositeUniqueValues(Map.of(fieldName, value, "isActive", true));
     }
 
     public Specification<E> compositeUniqueValues(Map<String, Object> uniqueFields) {

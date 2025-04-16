@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,15 +20,9 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
-    @Column(name = "created_user")
-    private Long createdUser;
-
     @Column(name = "created_date", updatable = false)
     @CreatedDate
     private LocalDateTime createdDate;
-
-    @Column(name = "last_updated_user")
-    private Long lastUpdatedUser;
 
     @Column(name = "last_updated_date")
     @LastModifiedDate

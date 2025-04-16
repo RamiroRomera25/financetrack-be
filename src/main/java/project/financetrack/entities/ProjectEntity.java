@@ -1,5 +1,6 @@
 package project.financetrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import project.financetrack.entities.base.BaseEntity;
 
 import java.util.List;
@@ -33,8 +35,10 @@ public class ProjectEntity extends BaseEntity {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @JsonIgnore
     private UserEntity user;
 
     @OneToMany(fetch = FetchType.EAGER)

@@ -2,6 +2,7 @@ package project.financetrack.services;
 
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.project.ProjectDTOPost;
+import project.financetrack.dtos.project.ProjectDTOPut;
 import project.financetrack.entities.ProjectEntity;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceCreate;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceGetById;
@@ -19,6 +20,7 @@ public interface ProjectService extends
         ServiceGetById<ProjectEntity, Long, ProjectEntity>,
         ServiceGetByUniqueAtt<ProjectEntity, Long, ProjectEntity>,
         ServiceGetAllByUniqueAtt<ProjectEntity, Long, ProjectEntity>,
-        ServiceSoftDelete<ProjectEntity, Long, ProjectEntity>
+        ServiceSoftDelete<ProjectEntity, Long, ProjectEntity>,
+        ServiceUpdate<ProjectEntity, Long, ProjectEntity, ProjectDTOPut>
 {
 }

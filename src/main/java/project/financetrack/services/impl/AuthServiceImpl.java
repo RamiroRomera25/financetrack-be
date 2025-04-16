@@ -17,6 +17,7 @@ import project.financetrack.repositories.UserRepository;
 import project.financetrack.security.jwt.JwtService;
 import project.financetrack.services.AuthService;
 import project.financetrack.services.EmailService;
+import project.financetrack.services.ProjectService;
 import project.financetrack.services.UserService;
 
 import java.util.Objects;
@@ -26,6 +27,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
+    private final ProjectService projectService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -70,9 +72,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean canAccessProject(Long userId, Long projectId) {
-         UserEntity user = this.userService.getById(userId);
-
-         for (ProjectEntity project : user.getProjects()) {
+         for (ProjectEntity project : this.projectService.getAllByUniqueFields("user.id", userId)) {
              if (project.getId().equals(projectId)) {
                  return true;
              }

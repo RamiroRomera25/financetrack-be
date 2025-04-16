@@ -3,7 +3,9 @@ package project.financetrack.services.impl;
 import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+import project.financetrack.dtos.category.CategoryDTO;
 import project.financetrack.dtos.category.CategoryDTOPost;
 import project.financetrack.dtos.project.ProjectDTOPost;
 import project.financetrack.entities.CategoryEntity;
@@ -16,6 +18,9 @@ import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.CategoryService;
 import project.financetrack.services.ProjectService;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryEntity create(CategoryDTOPost dtoPost) {
         Map att = Map.of(
                 "name", dtoPost.getName(),
-                "projectId", dtoPost.getProjectId()
+                "project.id", dtoPost.getProjectId()
         );
 
         if (CategoryService.super.getOptionalByCompositeUniqueFields(att).isPresent()) {
@@ -53,6 +58,22 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void importCategoriesToProject(Long projectSourceId, Long projectTargetId, Long userId) {
 
+    }
+
+    @Override
+    public List<CategoryDTO> getAllCategoriesByProjectId(Long projectId) {
+        List<CategoryDTO> categoryDTOS = new ArrayList<>();
+        List<CategoryEntity> categories = CategoryService.super.getAllByUniqueFields("project.id", projectId);
+        for (CategoryEntity category : categories) {
+            categoryDTOS.add(
+                CategoryDTO.builder()
+                    .name(category.getName())
+                    .color(category.getColor())
+                    .transactionCount(category.getTransactions().size())
+                    .build()
+            );
+        }
+        return categoryDTOS;
     }
 
     @Override
