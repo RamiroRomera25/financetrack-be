@@ -35,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectEntity create(ProjectDTOPost dtoPost) {
         Map att = Map.of(
                 "name", dtoPost.getName(),
-                "userId", dtoPost.getUserId()
+                "user.id", dtoPost.getUserId()
         );
 
         if (ProjectService.super.getOptionalByCompositeUniqueFields(att).isPresent()) {
