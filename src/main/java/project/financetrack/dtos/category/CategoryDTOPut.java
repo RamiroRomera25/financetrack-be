@@ -7,12 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDTOPost {
+public class CategoryDTOPut {
     @NotNull
     @NotBlank
     private String name;
@@ -22,6 +20,4 @@ public class CategoryDTOPost {
     @Pattern(regexp = "^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
     private String color;
 
-    @NotNull
-    private Long projectId;
 }

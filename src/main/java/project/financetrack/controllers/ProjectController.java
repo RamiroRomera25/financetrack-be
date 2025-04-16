@@ -35,10 +35,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/projects")
 public class ProjectController
-implements
-        ControllerGetById<ProjectEntity, Long, ProjectEntity, ProjectService>,
-        ControllerGetByCompositeUniqueAtt<ProjectEntity, Long, ProjectEntity, ProjectService>,
-        ControllerGetByUniqueAtt<ProjectEntity, Long, ProjectEntity, ProjectService>
+implements ControllerGetById<ProjectEntity, Long, ProjectEntity, ProjectService>
 {
 
     private final ProjectService projectService;
