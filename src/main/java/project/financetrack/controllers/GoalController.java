@@ -61,7 +61,7 @@ public class GoalController
     }
 
 
-    @DeleteMapping("/project/{projectId}")
+    @DeleteMapping("/project/{projectId}/{goalId}")
     public ResponseEntity<GoalEntity> delete(@PathVariable Long projectId, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return ResponseEntity.ok(goalService.delete(projectId));
@@ -70,7 +70,7 @@ public class GoalController
         }
     }
 
-    @PutMapping("/project/{projectId}")
+    @PutMapping("/project/{projectId}/{goalId}")
     public ResponseEntity<GoalEntity> update(@PathVariable Long projectId, @RequestBody @Valid GoalDTOPut dtoPut, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return ResponseEntity.ok(goalService.update(dtoPut, projectId));

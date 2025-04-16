@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class TransactionDTOPut {
 
     private Integer quantity;
+
+    private Long categoryId;
 }

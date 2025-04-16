@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GoalDTOPost extends BaseEntity {
+public class GoalDTOPost {
     private String objective;
 
     private LocalDate endDate;

@@ -67,6 +67,7 @@ public class CategoryServiceImpl implements CategoryService {
         for (CategoryEntity category : categories) {
             categoryDTOS.add(
                 CategoryDTO.builder()
+                    .id(category.getId())
                     .name(category.getName())
                     .color(category.getColor())
                     .transactionCount(category.getTransactions().size())

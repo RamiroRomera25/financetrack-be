@@ -42,7 +42,8 @@ public class CategoryController
     private final JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity<CategoryEntity> create(@RequestBody @Valid CategoryDTOPost dtoPost, Authentication auth) {
+    public ResponseEntity<CategoryEntity> create(@RequestBody @Valid CategoryDTOPost dtoPost,
+                                                 Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), dtoPost.getProjectId())) {
             return ResponseEntity.ok(categoryService.create(dtoPost));
         } else {
@@ -51,7 +52,8 @@ public class CategoryController
     }
 
     @GetMapping("/project/{projectId}")
-    public List<CategoryDTO> getAllCategoriesByProjectId(@PathVariable Long projectId, Authentication auth) {
+    public List<CategoryDTO> getAllCategoriesByProjectId(@PathVariable Long projectId,
+                                                         Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return categoryService.getAllCategoriesByProjectId(projectId);
         } else {
@@ -60,19 +62,24 @@ public class CategoryController
     }
 
 
-    @DeleteMapping("/project/{projectId}")
-    public ResponseEntity<CategoryEntity> delete(@PathVariable Long projectId, Authentication auth) {
+    @DeleteMapping("/project/{projectId}/{categoryId}")
+    public ResponseEntity<CategoryEntity> delete(@PathVariable Long projectId,
+                                                 @PathVariable Long categoryId,
+                                                 Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(categoryService.delete(projectId));
+            return ResponseEntity.ok(categoryService.delete(categoryId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @PutMapping("/project/{projectId}")
-    public ResponseEntity<CategoryEntity> update(@PathVariable Long projectId, @RequestBody @Valid CategoryDTOPut dtoPut, Authentication auth) {
+    @PutMapping("/project/{projectId}/{categoryId}")
+    public ResponseEntity<CategoryEntity> update(@PathVariable Long projectId,
+                                                 @PathVariable Long categoryId,
+                                                 @RequestBody @Valid CategoryDTOPut dtoPut,
+                                                 Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(categoryService.update(dtoPut, projectId));
+            return ResponseEntity.ok(categoryService.update(dtoPut, categoryId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
