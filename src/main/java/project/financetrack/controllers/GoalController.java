@@ -62,18 +62,23 @@ public class GoalController
 
 
     @DeleteMapping("/project/{projectId}/{goalId}")
-    public ResponseEntity<GoalEntity> delete(@PathVariable Long projectId, Authentication auth) {
+    public ResponseEntity<GoalEntity> delete(@PathVariable Long projectId,
+                                             @PathVariable Long goalId,
+                                             Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(goalService.delete(projectId));
+            return ResponseEntity.ok(goalService.delete(goalId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PutMapping("/project/{projectId}/{goalId}")
-    public ResponseEntity<GoalEntity> update(@PathVariable Long projectId, @RequestBody @Valid GoalDTOPut dtoPut, Authentication auth) {
+    public ResponseEntity<GoalEntity> update(@PathVariable Long projectId,
+                                             @PathVariable Long goalId,
+                                             @RequestBody @Valid GoalDTOPut dtoPut,
+                                             Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(goalService.update(dtoPut, projectId));
+            return ResponseEntity.ok(goalService.update(dtoPut, goalId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }

@@ -57,8 +57,8 @@ public class ProjectEntity extends BaseEntity {
     @JoinColumn
     private List<MaturityEntity> maturities;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinColumn
-//    private List<> reminders;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn
+    private List<ReminderEntity> reminders;
 
 }
