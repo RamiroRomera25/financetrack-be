@@ -14,8 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import project.financetrack.entities.base.BaseEntity;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "investments")
 @Entity

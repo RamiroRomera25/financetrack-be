@@ -5,16 +5,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.project.ProjectDTOPost;
 import project.financetrack.entities.ProjectEntity;
-import project.financetrack.entities.UserEntity;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.ProjectRepository;
-import project.financetrack.repositories.UserRepository;
-import project.financetrack.repositories.specs.GenericSpecification;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.ProjectService;
 import project.financetrack.services.UserService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service

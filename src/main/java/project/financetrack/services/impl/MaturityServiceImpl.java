@@ -5,14 +5,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.maturity.MaturityDTOPost;
 import project.financetrack.entities.MaturityEntity;
-import project.financetrack.entities.ProjectEntity;
 import project.financetrack.enums.MaturityState;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.MaturityRepository;
-import project.financetrack.repositories.ProjectRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.MaturityService;
-import project.financetrack.services.UserService;
 
 @Service
 @RequiredArgsConstructor

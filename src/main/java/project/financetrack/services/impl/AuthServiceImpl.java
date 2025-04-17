@@ -20,9 +20,6 @@ import project.financetrack.services.EmailService;
 import project.financetrack.services.ProjectService;
 import project.financetrack.services.UserService;
 
-import java.util.Objects;
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {

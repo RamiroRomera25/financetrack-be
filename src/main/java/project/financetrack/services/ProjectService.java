@@ -8,7 +8,6 @@ import project.financetrack.services.genericSegregation.basicCRUD.ServiceCreate;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceGetById;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceSoftDelete;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceUpdate;
-import project.financetrack.services.genericSegregation.compositeUniqueAtt.ServiceGetAllByCompositeUniqueAtt;
 import project.financetrack.services.genericSegregation.compositeUniqueAtt.ServiceGetByCompositeUniqueAtt;
 import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetAllByUniqueAtt;
 import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetByUniqueAtt;

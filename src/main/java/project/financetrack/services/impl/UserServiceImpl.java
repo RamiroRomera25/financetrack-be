@@ -7,7 +7,6 @@ import project.financetrack.dtos.user.UserDTO;
 import project.financetrack.entities.UserEntity;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.UserRepository;
-import project.financetrack.repositories.specs.GenericSpecification;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.UserService;
 

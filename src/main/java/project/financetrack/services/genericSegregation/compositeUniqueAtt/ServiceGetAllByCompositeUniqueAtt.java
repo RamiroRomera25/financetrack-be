@@ -1,13 +1,11 @@
 package project.financetrack.services.genericSegregation.compositeUniqueAtt;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public interface ServiceGetAllByCompositeUniqueAtt<E, I, M> {
