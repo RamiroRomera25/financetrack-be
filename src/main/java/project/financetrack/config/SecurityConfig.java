@@ -77,6 +77,7 @@ public class SecurityConfig {
                                 "/swagger-ui/index.html",
                                 // Agrega la ruta a la consola H2
                                 "/h2-console/**",
+                                "/ping",
                                 "/api/v1/**")
                         .permitAll()
                         .anyRequest().authenticated()

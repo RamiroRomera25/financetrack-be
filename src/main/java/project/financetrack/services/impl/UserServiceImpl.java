@@ -44,4 +44,15 @@ public class UserServiceImpl implements UserService {
     public SpecificationBuilder<UserEntity> specificationBuilder() {
         return specificationBuilder;
     }
+
+    @Override
+    public boolean setPremiumByUserId(Long userId) {
+        UserEntity user = UserService.super.getById(userId);
+        if (!user.isPremium()) {
+            user.setPremium(true);
+            this.userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 }

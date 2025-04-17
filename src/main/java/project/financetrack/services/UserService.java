@@ -12,4 +12,5 @@ extends
         ServiceGetByUniqueAtt<UserEntity, Long, UserDTO>,
         ServiceGetById<UserEntity, Long, UserDTO>
 {
+    boolean setPremiumByUserId(Long userId);
 }

@@ -48,6 +48,8 @@ public class UserEntity extends BaseEntity {
     @Column(name = "email")
     private String email;
 
+    private boolean premium = false;
+
     @OneToMany
     private List<ProjectEntity> projects;
 
