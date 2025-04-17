@@ -18,7 +18,6 @@ import project.financetrack.entities.base.BaseEntity;
 import project.financetrack.enums.MaturityState;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "maturities")

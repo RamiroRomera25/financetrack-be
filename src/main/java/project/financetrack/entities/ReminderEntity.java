@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import project.financetrack.entities.base.BaseEntity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "reminders")
