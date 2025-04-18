@@ -11,13 +11,18 @@ import org.springframework.stereotype.Service;
 import org.w3c.tidy.Tidy;
 import project.financetrack.dtos.email.CreateEmailDTO;
 import project.financetrack.dtos.user.UserDTO;
+import project.financetrack.entities.MaturityEntity;
+import project.financetrack.entities.ProjectEntity;
+import project.financetrack.entities.UserEntity;
 import project.financetrack.enums.EmailType;
+import project.financetrack.enums.MaturityState;
 import project.financetrack.services.EmailService;
 import project.financetrack.utils.EmailVariableUtils;
 
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +43,12 @@ public class EmailServiceImpl implements EmailService {
     @Value("${mail.message.welcome}")
     private String EMAIL_WELCOME;
 
+    @Value("${mail.message.maturity.notification}")
+    private String EMAIL_MATURITY_NOTIFICATION;
+
+    @Value("${mail.message.maturity.late}")
+    private String EMAIL_MATURITY_LATE;
+
     @Override
     public void welcomeMail(UserDTO user) {
         CreateEmailDTO createEmailDTO = new CreateEmailDTO();
@@ -52,9 +63,33 @@ public class EmailServiceImpl implements EmailService {
         this.sendEmailWithTemplate(createEmailDTO);
     }
 
+    @Override
+    public void maturityEmail(MaturityEntity maturity, MaturityState state) {
+        ProjectEntity project = maturity.getProject();
+        UserEntity user = project.getUser();
+
+        CreateEmailDTO createEmailDTO = new CreateEmailDTO();
+        createEmailDTO.setEmailType(
+            state.equals(MaturityState.NOTIFICATED) ? EmailType.MATURITY_NOTIFICATION : EmailType.MATURITY_LATE
+        );
+        createEmailDTO.setRecipient(user.getEmail());
+
+        Map<String, String> variables = new HashMap<>();
+
+        variables.put("fullName", user.getFirstName() + " " + user.getLastName());
+        variables.put("project.name", project.getName());
+        variables.put("maturity.quantity", maturity.getQuantity().toString());
+        variables.put("maturity.endDate", maturity.getEndDate().format(DateTimeFormatter.ISO_DATE));
+
+        createEmailDTO.setVariables(variables);
+        this.sendEmailWithTemplate(createEmailDTO);
+    }
+
     private void sendEmailWithTemplate(CreateEmailDTO createEmailDTO) {
         String emailTemplate = switch (createEmailDTO.getEmailType()) {
             case WELCOME -> new String(Base64.getDecoder().decode(EMAIL_WELCOME), StandardCharsets.UTF_8);
+            case MATURITY_NOTIFICATION -> new String(Base64.getDecoder().decode(EMAIL_MATURITY_NOTIFICATION), StandardCharsets.UTF_8);
+            case MATURITY_LATE -> new String(Base64.getDecoder().decode(EMAIL_MATURITY_LATE), StandardCharsets.UTF_8);
             default -> throw new IllegalArgumentException("Email type not supported");
         };
 

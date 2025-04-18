@@ -35,6 +35,8 @@ public class GoalEntity extends BaseEntity {
 
     private Integer quantity;
 
+    private String notes;
+
     @ManyToOne
     @JoinColumn
     private ProjectEntity project;

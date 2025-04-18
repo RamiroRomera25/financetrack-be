@@ -16,5 +16,7 @@ public class GoalDTOPut {
 
     private LocalDate endDate;
 
+    private String notes;
+
     private Integer quantity;
 }

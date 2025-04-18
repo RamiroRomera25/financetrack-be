@@ -18,5 +18,7 @@ public class GoalDTOPost {
 
     private Integer quantity;
 
+    private String notes;
+
     private Long projectId;
 }
