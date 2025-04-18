@@ -37,7 +37,7 @@ public class TransactionController
     @PostMapping("/project/{projectId}")
     public ResponseEntity<TransactionEntity> create(@RequestBody @Valid TransactionDTOPost dtoPost, Authentication auth, @PathVariable Long projectId) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return ResponseEntity.ok(transactionService.create(dtoPost));
+            return ResponseEntity.ok(transactionService.create(dtoPost, projectId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
@@ -46,7 +46,7 @@ public class TransactionController
     @GetMapping("/project/{projectId}")
     public List<TransactionEntity> getAllTransactionsByProjectId(@PathVariable Long projectId, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return transactionService.getAllByUniqueFields("project.id", projectId);
+            return transactionService.getAllByUniqueFields("category.project.id", projectId);
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }

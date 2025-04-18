@@ -19,4 +19,5 @@ public interface TransactionService extends
         ServiceSoftDelete<TransactionEntity, Long, TransactionEntity>,
         ServiceGetAllByUniqueAtt<TransactionEntity, Long, TransactionEntity>
 {
+    TransactionEntity create(TransactionDTOPost dtoPost, Long projectId);
 }
