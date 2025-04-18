@@ -11,12 +11,17 @@ import project.financetrack.services.genericSegregation.basicCRUD.ServiceSoftDel
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceUpdate;
 import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetAllByUniqueAtt;
 
+import java.io.IOException;
+import java.util.List;
+
 @Service
 public interface InvestmentService extends
-        ServiceCreate<InvestmentEntity, Long, InvestmentDTO, InvestmentDTOPost>,
-        ServiceUpdate<InvestmentEntity, Long, InvestmentDTO, InvestmentDTOPut>,
-        ServiceGetAllByUniqueAtt<InvestmentEntity, Long, InvestmentDTO>,
         ServiceGetById<InvestmentEntity, Long, InvestmentDTO>,
         ServiceSoftDelete<InvestmentEntity, Long, InvestmentDTO>
 {
+    InvestmentDTO create(InvestmentDTOPost dtoPost) throws IOException;
+
+    List<InvestmentDTO> getAllModelByUniqueFields(String uniqueField, Object value) throws IOException;
+
+    InvestmentDTO update(InvestmentDTOPut dtoPut, Long id) throws IOException;
 }

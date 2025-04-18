@@ -21,6 +21,7 @@ import project.financetrack.security.jwt.JwtService;
 import project.financetrack.services.AuthService;
 import project.financetrack.services.InvestmentService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,7 @@ public class InvestmentController
     private final JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity<InvestmentDTO> create(@RequestBody @Valid InvestmentDTOPost dtoPost, Authentication auth) {
+    public ResponseEntity<InvestmentDTO> create(@RequestBody @Valid InvestmentDTOPost dtoPost, Authentication auth) throws IOException {
         if (authService.canAccessProject(jwtService.extractId(auth), dtoPost.getProjectId())) {
             return ResponseEntity.ok(investmentService.create(dtoPost));
         } else {
@@ -45,7 +46,7 @@ public class InvestmentController
     }
 
     @GetMapping("/project/{projectId}")
-    public List<InvestmentDTO> getAllInvestmentsByProjectId(@PathVariable Long projectId, Authentication auth) {
+    public List<InvestmentDTO> getAllInvestmentsByProjectId(@PathVariable Long projectId, Authentication auth) throws IOException {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return investmentService.getAllModelByUniqueFields("project.id", projectId);
         } else {
@@ -68,7 +69,7 @@ public class InvestmentController
     public ResponseEntity<InvestmentDTO> update(@PathVariable Long projectId,
                                                    @PathVariable Long investmentId,
                                                    @RequestBody @Valid InvestmentDTOPut dtoPut,
-                                                   Authentication auth) {
+                                                   Authentication auth) throws IOException {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
             return ResponseEntity.ok(investmentService.update(dtoPut, investmentId));
         } else {

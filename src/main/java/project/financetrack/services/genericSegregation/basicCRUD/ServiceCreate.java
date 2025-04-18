@@ -3,6 +3,8 @@ package project.financetrack.services.genericSegregation.basicCRUD;
 import org.modelmapper.ModelMapper;
 import project.financetrack.repositories.GenericRepository;
 
+import java.io.IOException;
+
 
 public interface ServiceCreate<E, I, M, DTOPOST> {
     ModelMapper getMapper();

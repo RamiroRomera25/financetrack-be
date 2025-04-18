@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -54,41 +54,6 @@ public class YFinanceServiceImpl {
     }
 
     /**
-     * Completa los datos de una sola inversión con información de Yahoo Finance
-     *
-     * @param investment Inversión con id, tickerSymbol y quantity completados
-     * @return Inversión con todos los datos completados
-     * @throws IOException Si hay problemas al consultar la API
-     */
-    public InvestmentDTO completeInvestmentData(InvestmentDTO investment) throws IOException {
-        Stock stock = YahooFinance.get(investment.getTickerSymbol());
-
-        if (stock != null) {
-            // Nombre de la compañía
-            investment.setName(stock.getName());
-
-            // Precio actual
-            BigDecimal price = stock.getQuote().getPrice();
-            investment.setPrice(price.doubleValue());
-
-            // Valor total (precio * cantidad)
-            BigDecimal value = price.multiply(BigDecimal.valueOf(investment.getQuantity()));
-            investment.setValue(value.doubleValue());
-
-            // Cambio en valor monetario
-            BigDecimal change = stock.getQuote().getChange();
-            investment.setChange(change != null ? change.doubleValue() : 0.0);
-
-            // Cambio porcentual
-            BigDecimal changePercent = stock.getQuote().getChangeInPercent();
-            investment.setChangePercentage(changePercent != null ?
-                    changePercent.setScale(2, RoundingMode.HALF_EVEN).doubleValue() : 0.0);
-        }
-
-        return investment;
-    }
-
-    /**
      * Verifica si un símbolo bursátil existe y devuelve sus datos
      *
      * @param tickerSymbol Símbolo a verificar
