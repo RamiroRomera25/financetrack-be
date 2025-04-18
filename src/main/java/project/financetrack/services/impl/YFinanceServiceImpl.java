@@ -3,7 +3,7 @@ package project.financetrack.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.investment.InvestmentDTO;
-import project.financetrack.services.YFinanceService;
+import project.financetrack.services.ExternalInvestmentService;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
@@ -13,12 +13,17 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("yFinanceServiceImpl")
 @RequiredArgsConstructor
-public class YFinanceServiceImpl implements YFinanceService {
+public class YFinanceServiceImpl implements ExternalInvestmentService {
 
     public List<InvestmentDTO> completeInvestmentData(List<InvestmentDTO> investments) throws IOException {
         List<String> symbols = new ArrayList<>();
+
+        if (investments.isEmpty()) {
+            return List.of();
+        }
+
         for (InvestmentDTO investment : investments) {
             symbols.add(investment.getTickerSymbol());
         }

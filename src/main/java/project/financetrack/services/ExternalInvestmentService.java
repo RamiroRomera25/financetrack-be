@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public interface YFinanceService {
+public interface ExternalInvestmentService {
     InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Integer quantity) throws IOException;
     List<InvestmentDTO> completeInvestmentData(List<InvestmentDTO> investments) throws IOException;
 }

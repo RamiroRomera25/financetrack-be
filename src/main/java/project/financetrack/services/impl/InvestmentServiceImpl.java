@@ -2,6 +2,8 @@ package project.financetrack.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.investment.InvestmentDTO;
 import project.financetrack.dtos.investment.InvestmentDTOPost;
@@ -12,7 +14,7 @@ import project.financetrack.repositories.InvestmentRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.InvestmentService;
 import project.financetrack.services.ProjectService;
-import project.financetrack.services.YFinanceService;
+import project.financetrack.services.ExternalInvestmentService;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,13 +30,15 @@ public class InvestmentServiceImpl implements InvestmentService {
 
     private final ProjectService projectService;
 
-    private final YFinanceService yFinanceService;
+    @Autowired
+    @Qualifier("finnhubServiceImpl")
+    private ExternalInvestmentService externalInvestmentService;
 
     private final SpecificationBuilder<InvestmentEntity> specificationBuilder;
 
     @Override
     public InvestmentDTO create(InvestmentDTOPost dtoPost) throws IOException {
-        InvestmentDTO investmentToReturn = this.yFinanceService.validateAndGetSymbolData(dtoPost.getTickerSymbol(), dtoPost.getQuantity());
+        InvestmentDTO investmentToReturn = this.externalInvestmentService.validateAndGetSymbolData(dtoPost.getTickerSymbol(), dtoPost.getQuantity());
 
         InvestmentEntity investmentEntity = InvestmentEntity.builder()
                 .project(projectService.getById(dtoPost.getProjectId()))
@@ -58,7 +62,7 @@ public class InvestmentServiceImpl implements InvestmentService {
                 .map((entity) -> getMapper().map(entity, modelClass()))
                 .collect(Collectors.toList());
 
-        return this.yFinanceService.completeInvestmentData(investments);
+        return this.externalInvestmentService.completeInvestmentData(investments);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class InvestmentServiceImpl implements InvestmentService {
         modelMapper.map(dtoPut, entity);
         InvestmentEntity investmentSaved = this.investmentRepository.save(entity);
 
-        InvestmentDTO investmentToReturn = this.yFinanceService.validateAndGetSymbolData(
+        InvestmentDTO investmentToReturn = this.externalInvestmentService.validateAndGetSymbolData(
             investmentSaved.getTickerSymbol(), investmentSaved.getQuantity()
         );
         investmentToReturn.setId(investmentSaved.getId());
