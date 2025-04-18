@@ -12,6 +12,7 @@ import project.financetrack.repositories.MaturityRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.EmailService;
 import project.financetrack.services.MaturityService;
+import project.financetrack.services.ProjectService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,9 +30,12 @@ public class MaturityServiceImpl implements MaturityService {
 
     private final EmailService emailService;
 
+    private final ProjectService projectService;
+
     @Override
     public MaturityEntity create(MaturityDTOPost dtoPost) {
         MaturityEntity maturity = MaturityEntity.builder()
+                .project(projectService.getById(dtoPost.getProjectId()))
                 .state(MaturityState.ON_WAIT)
                 .quantity(dtoPost.getQuantity())
                 .endDate(dtoPost.getEndDate())
