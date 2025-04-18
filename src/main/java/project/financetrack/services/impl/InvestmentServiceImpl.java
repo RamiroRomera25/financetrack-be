@@ -3,6 +3,7 @@ package project.financetrack.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import project.financetrack.dtos.investment.InvestmentDTO;
 import project.financetrack.dtos.investment.InvestmentDTOPost;
 import project.financetrack.entities.InvestmentEntity;
 import project.financetrack.repositories.GenericRepository;
@@ -24,7 +25,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     private final SpecificationBuilder<InvestmentEntity> specificationBuilder;
 
     @Override
-    public InvestmentEntity create(InvestmentDTOPost dtoPost) {
+    public InvestmentDTO create(InvestmentDTOPost dtoPost) {
         // TODO: Validar contra YFinance que exista.
 
         InvestmentEntity investment = InvestmentEntity.builder()
@@ -57,7 +58,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
     @Override
-    public Class<InvestmentEntity> modelClass() {
-        return InvestmentEntity.class;
+    public Class<InvestmentDTO> modelClass() {
+        return InvestmentDTO.class;
     }
 }

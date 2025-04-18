@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import project.financetrack.dtos.investment.InvestmentDTO;
 import project.financetrack.dtos.investment.InvestmentDTOPost;
 import project.financetrack.dtos.investment.InvestmentDTOPut;
-import project.financetrack.entities.InvestmentEntity;
 import project.financetrack.security.jwt.JwtService;
 import project.financetrack.services.AuthService;
 import project.financetrack.services.InvestmentService;
@@ -36,7 +36,7 @@ public class InvestmentController
     private final JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity<InvestmentEntity> create(@RequestBody @Valid InvestmentDTOPost dtoPost, Authentication auth) {
+    public ResponseEntity<InvestmentDTO> create(@RequestBody @Valid InvestmentDTOPost dtoPost, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), dtoPost.getProjectId())) {
             return ResponseEntity.ok(investmentService.create(dtoPost));
         } else {
@@ -45,17 +45,16 @@ public class InvestmentController
     }
 
     @GetMapping("/project/{projectId}")
-    public List<InvestmentEntity> getAllInvestmentsByProjectId(@PathVariable Long projectId, Authentication auth) {
+    public List<InvestmentDTO> getAllInvestmentsByProjectId(@PathVariable Long projectId, Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
-            return investmentService.getAllByUniqueFields("project.id", projectId);
+            return investmentService.getAllModelByUniqueFields("project.id", projectId);
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 
-
     @DeleteMapping("/project/{projectId}/{investmentId}")
-    public ResponseEntity<InvestmentEntity> delete(@PathVariable Long projectId,
+    public ResponseEntity<InvestmentDTO> delete(@PathVariable Long projectId,
                                                    @PathVariable Long investmentId,
                                                    Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
@@ -66,7 +65,7 @@ public class InvestmentController
     }
 
     @PutMapping("/project/{projectId}/{investmentId}")
-    public ResponseEntity<InvestmentEntity> update(@PathVariable Long projectId,
+    public ResponseEntity<InvestmentDTO> update(@PathVariable Long projectId,
                                                    @PathVariable Long investmentId,
                                                    @RequestBody @Valid InvestmentDTOPut dtoPut,
                                                    Authentication auth) {
@@ -76,5 +75,4 @@ public class InvestmentController
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
-
 }
