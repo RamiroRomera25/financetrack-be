@@ -2,7 +2,7 @@ services:
   postgres:
     image: postgres:17
     environment:
-      POSTGRES_DB: generic
+      POSTGRES_DB: financetrack
       POSTGRES_USER: rami
       POSTGRES_PASSWORD: rami
     ports:

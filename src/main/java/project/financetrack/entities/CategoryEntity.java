@@ -1,5 +1,7 @@
 package project.financetrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,10 +36,12 @@ public class CategoryEntity extends BaseEntity {
 
     private String color;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
+    @JsonIgnoreProperties("category")
     private List<TransactionEntity> transactions;
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private ProjectEntity project;
 }

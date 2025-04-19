@@ -46,6 +46,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public ProjectEntity getById(Long id) {
+
+
+        return ProjectService.super.getById(id);
+    }
+
+    @Override
     public ModelMapper getMapper() {
         return modelMapper;
     }

@@ -44,10 +44,13 @@ public class UserDTO {
     @JsonProperty(value = "is_active")
     private boolean isActive;
 
+    private boolean premium;
+
     public UserDTO(UserEntity entity) {
         this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
+        this.premium = entity.getPremium();
     }
 }

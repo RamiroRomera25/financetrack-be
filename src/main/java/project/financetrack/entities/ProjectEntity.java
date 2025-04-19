@@ -41,24 +41,19 @@ public class ProjectEntity extends BaseEntity {
     @JsonIgnore
     private UserEntity user;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn
+    @OneToMany(mappedBy = "project")
     private List<CategoryEntity> categories;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn
+    @OneToMany(mappedBy = "project")
     private List<GoalEntity> goals;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn
+    @OneToMany(mappedBy = "project")
     private List<InvestmentEntity> investments;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn
+    @OneToMany(mappedBy = "project")
     private List<MaturityEntity> maturities;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn
+    @OneToMany(mappedBy = "project")
     private List<ReminderEntity> reminders;
 
 }

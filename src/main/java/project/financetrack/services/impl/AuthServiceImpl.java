@@ -40,6 +40,7 @@ public class AuthServiceImpl implements AuthService {
         UserEntity user = new UserEntity(post);
         user.setIsActive(true);
         user.setPassword(passwordEncoder.encode(post.getPassword()));
+        user.setPremium(false);
 
         UserDTO userDTO = new UserDTO(userRepository.save(user));
 

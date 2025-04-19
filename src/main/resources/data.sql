@@ -9,3 +9,6 @@ VALUES ('asd', 2, true);
 
 INSERT INTO projects(name, user_id, is_active)
 VALUES ('asdd', 2, true);
+
+-- INSERT INTO categories(name, color, project_id)
+-- VALUES ('Comida', '#ff0000', 1)

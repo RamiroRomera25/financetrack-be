@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean setPremiumByUserId(Long userId) {
         UserEntity user = UserService.super.getById(userId);
-        if (!user.isPremium()) {
+        if (!user.getPremium()) {
             user.setPremium(true);
             this.userRepository.save(user);
             return true;

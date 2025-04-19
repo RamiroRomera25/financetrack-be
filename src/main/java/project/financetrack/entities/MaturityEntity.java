@@ -1,5 +1,6 @@
 package project.financetrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -41,5 +42,6 @@ public class MaturityEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private ProjectEntity project;
 }
