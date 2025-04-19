@@ -14,4 +14,6 @@ public class TransactionDTOPut {
     private Integer quantity;
 
     private Long categoryId;
+
+    private Long projectId;
 }

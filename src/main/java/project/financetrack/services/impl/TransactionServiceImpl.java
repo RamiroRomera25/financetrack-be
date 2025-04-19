@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import project.financetrack.dtos.transaction.TransactionDTOPost;
+import project.financetrack.dtos.transaction.TransactionDTOPut;
 import project.financetrack.entities.CategoryEntity;
 import project.financetrack.entities.TransactionEntity;
 import project.financetrack.repositories.GenericRepository;
@@ -39,6 +40,23 @@ public class TransactionServiceImpl implements TransactionService {
                 .build();
 
         return TransactionService.super.createWithEntity(transaction);
+    }
+
+    @Override
+    public TransactionEntity update(TransactionDTOPut dtoPut, Long id) {
+        CategoryEntity category = categoryService.getById(dtoPut.getCategoryId());
+
+        if (!category.getProject().getId().equals(dtoPut.getProjectId())) {
+            throw new IllegalArgumentException("The category does not belong to the project");
+        }
+
+        TransactionEntity transactionToUpdate = TransactionEntity.builder()
+                .id(id)
+                .category(category)
+                .quantity(dtoPut.getQuantity())
+                .build();
+
+        return this.transactionRepository.save(transactionToUpdate);
     }
 
     @Override

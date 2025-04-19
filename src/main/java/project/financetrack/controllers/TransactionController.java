@@ -70,6 +70,7 @@ public class TransactionController
                                                     @RequestBody @Valid TransactionDTOPut dtoPut,
                                                     Authentication auth) {
         if (authService.canAccessProject(jwtService.extractId(auth), projectId)) {
+            dtoPut.setProjectId(projectId);
             return ResponseEntity.ok(transactionService.update(dtoPut, transactionId));
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

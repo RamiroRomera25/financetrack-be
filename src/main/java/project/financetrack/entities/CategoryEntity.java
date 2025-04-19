@@ -36,7 +36,7 @@ public class CategoryEntity extends BaseEntity {
 
     private String color;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
     @JsonIgnoreProperties("category")
     private List<TransactionEntity> transactions;
 
