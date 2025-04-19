@@ -8,6 +8,7 @@ import project.financetrack.services.genericSegregation.basicCRUD.ServiceCreate;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceGetById;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceSoftDelete;
 import project.financetrack.services.genericSegregation.basicCRUD.ServiceUpdate;
+import project.financetrack.services.genericSegregation.compositeUniqueAtt.ServiceGetAllByCompositeUniqueAtt;
 import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetAllByUniqueAtt;
 
 @Service
@@ -16,6 +17,7 @@ public interface ReminderService extends
         ServiceGetById<ReminderEntity, Long, ReminderEntity>,
         ServiceSoftDelete<ReminderEntity, Long, ReminderEntity>,
         ServiceUpdate<ReminderEntity, Long, ReminderEntity, ReminderDTOPut>,
-        ServiceGetAllByUniqueAtt<ReminderEntity, Long, ReminderEntity>
+        ServiceGetAllByUniqueAtt<ReminderEntity, Long, ReminderEntity>,
+        ServiceGetAllByCompositeUniqueAtt<ReminderEntity, Long, ReminderEntity>
 {
 }

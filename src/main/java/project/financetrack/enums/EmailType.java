@@ -4,5 +4,5 @@ public enum EmailType {
     WELCOME,
     MATURITY_NOTIFICATION,
     MATURITY_LATE,
-    REMINDER
+    REMINDER,
 }
