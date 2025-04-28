@@ -14,7 +14,6 @@ import project.financetrack.dtos.user.UserDTOPost;
 import project.financetrack.dtos.user.login.LoginRequest;
 import project.financetrack.dtos.user.login.TokenResponse;
 import project.financetrack.services.AuthService;
-import project.financetrack.services.EmailService;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -22,8 +21,6 @@ import project.financetrack.services.EmailService;
 public class AuthController {
 
     private final AuthService authService;
-
-    private final EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody @Valid UserDTOPost request) {

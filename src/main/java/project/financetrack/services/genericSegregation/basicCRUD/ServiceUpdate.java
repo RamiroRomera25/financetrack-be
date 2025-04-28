@@ -3,6 +3,8 @@ package project.financetrack.services.genericSegregation.basicCRUD;
 import org.modelmapper.ModelMapper;
 import project.financetrack.repositories.GenericRepository;
 
+import java.io.IOException;
+
 public interface ServiceUpdate<E, I, M, DTOPUT> extends ServiceGetById<E, I, M> {
 
     ModelMapper getMapper();

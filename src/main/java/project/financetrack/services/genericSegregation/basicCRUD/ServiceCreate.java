@@ -3,6 +3,8 @@ package project.financetrack.services.genericSegregation.basicCRUD;
 import org.modelmapper.ModelMapper;
 import project.financetrack.repositories.GenericRepository;
 
+import java.io.IOException;
+
 
 public interface ServiceCreate<E, I, M, DTOPOST> {
     ModelMapper getMapper();
@@ -15,6 +17,11 @@ public interface ServiceCreate<E, I, M, DTOPOST> {
 
     default M create(DTOPOST dtoPost) {
         E entityToSave = getMapper().map(dtoPost, entityClass());
+        return getMapper().map(getRepository().save(entityToSave), modelClass());
+    }
+
+    default M createWithEntity(E entity) {
+        E entityToSave = getMapper().map(entity, entityClass());
         return getMapper().map(getRepository().save(entityToSave), modelClass());
     }
 }

@@ -63,7 +63,7 @@ public interface ControllerGetById<E, I, M, SERVICE extends ServiceGetById<E, I,
             )
     })
     @GetMapping("/{id}")
-    default ResponseEntity<M> getAll(@PathVariable I id) {
+    default ResponseEntity<M> getById(@PathVariable I id) {
         return ResponseEntity.ok(getService().getModelById(id));
     }
 }

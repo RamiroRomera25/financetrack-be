@@ -45,8 +45,29 @@ public class SecurityConfig {
     // TODO: Descomentar esto para bloquear peticiones sin token y eliminar swagger para prod
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http.csrf(csrf -> csrf.disable())
+//                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+//                .authorizeHttpRequests(authorize -> authorize
+//                        .requestMatchers("/api/v1/auth/**",
+//                                "/api/v1/matchs",
+//                                "/api/v1/discount/available/**",
+//                                "/v3/api-docs/**",
+//                                "/swagger-ui/**",
+//                                "/swagger-ui/index.html",
+//                                "/api/v1/**")
+//                        .permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//                .logout(logout ->
+//                        logout.logoutUrl("/api/v1/auth/logout")
+//                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+//                );
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                // Deshabilitar headers de seguridad de frames para h2-console
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/auth/**",
                                 "/api/v1/matchs",
@@ -54,6 +75,9 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui/index.html",
+                                // Agrega la ruta a la consola H2
+                                "/h2-console/**",
+                                "/ping",
                                 "/api/v1/**")
                         .permitAll()
                         .anyRequest().authenticated()

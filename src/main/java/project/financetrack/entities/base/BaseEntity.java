@@ -1,5 +1,6 @@
 package project.financetrack.entities.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -12,13 +13,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-/**
- * The {@code BaseEntity} class is a base class
- * that provides common auditing fields
- * for entities, such as the user who created
- * or last updated the entity, and the
- * respective timestamps.
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,35 +20,15 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
-    /**
-     * The ID of the user who created the entity.
-     */
-    @Column(name = "created_user")
-    private Long createdUser;
-
-    /**
-     * The date and time when the entity was created.
-     */
     @Column(name = "created_date", updatable = false)
     @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
     private LocalDateTime createdDate;
 
-    /**
-     * The ID of the user who last updated the entity.
-     */
-    @Column(name = "last_updated_user")
-    private Long lastUpdatedUser;
-
-    /**
-     * The date and time when the entity was last updated.
-     */
     @Column(name = "last_updated_date")
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
-    /**
-     * Field to handle soft delete (logical deletion).
-     */
     @Column(name = "is_active")
     private Boolean isActive = true;
 }

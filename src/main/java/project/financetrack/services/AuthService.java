@@ -13,4 +13,6 @@ public interface AuthService {
     TokenResponse authenticate(LoginRequest request);
 
     Boolean getEmailExists(String email);
+
+    boolean canAccessProject(Long userId, Long projectId);
 }

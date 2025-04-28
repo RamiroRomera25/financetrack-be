@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pago Vencido - FinanceTrack</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f8fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #6d90ea;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header img {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .content {
+            padding: 30px;
+            color: #333333;
+        }
+
+        .content h2 {
+            color: #f43f5e;
+            font-size: 22px;
+        }
+
+        .content p {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .status-badge {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #f43f5e;
+            text-align: center;
+            margin: 20px 0;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .payment-info {
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #f43f5e;
+        }
+
+        .payment-info p {
+            margin: 5px 0;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #059669;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #888888;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="https://imgur.com/FKgMz3f.png" alt="FinanceTrack Logo">
+        <h1>¡Atención! Pago vencido</h1>
+    </div>
+    <div class="content">
+        <h2>Tu pago para {{project.name}} ha vencido</h2>
+
+        <div class="status-badge">VENCIDO</div>
+
+        <p>Estimado/a <strong>{{fullName}}</strong>,</p>
+
+        <p>Te informamos que el plazo de pago para tu proyecto <strong>{{project.name}}</strong> ha vencido. Para evitar cargos adicionales por mora y mantener tu historial crediticio en buen estado, te recomendamos realizar el pago lo antes posible.</p>
+
+        <div class="payment-info">
+            <p><strong>Proyecto:</strong> {{project.name}}</p>
+            <p><strong>Cantidad a pagar:</strong> ${{maturity.quantity}}</p>
+            <p><strong>Fecha de vencimiento:</strong> {{maturity.endDate}}</p>
+            <p><strong>Estado actual:</strong> Vencido</p>
+        </div>
+
+        <p>Recuerda que los pagos atrasados pueden generar intereses adicionales y afectar tu capacidad para obtener futuros financiamientos. Si ya realizaste este pago, por favor ignora este mensaje o contáctanos para actualizar nuestros registros.</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 FinanceTrack. Todos los derechos reservados.</p>
+    </div>
+</div>
+</body>
+</html>

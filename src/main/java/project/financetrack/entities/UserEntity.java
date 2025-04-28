@@ -5,13 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import project.financetrack.dtos.user.UserDTOPost;
 import project.financetrack.entities.base.BaseEntity;
+
+import java.util.List;
 
 /**
  * The {@code UserEntity} class represents a user of the app.
@@ -23,40 +27,31 @@ import project.financetrack.entities.base.BaseEntity;
 @Table(name = "users")
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity extends BaseEntity {
 
-    /**
-     * Unique identifier for the turn.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * First name of the owner of the user.
-     */
     @Column(name = "first_name")
     private String firstName;
 
-    /**
-     * Second name of the owner of the user.
-     */
     @Column(name = "last_name")
     private String lastName;
 
-    /**
-     * Password of the user.
-     */
     @Column(name = "password")
     private String password;
 
-    /**
-     * Email of the user.
-     */
     @Column(name = "email")
     private String email;
+
+    private Boolean premium = false;
+
+    @OneToMany
+    private List<ProjectEntity> projects;
 
     public UserEntity(UserDTOPost dtoPost) {
         this.email = dtoPost.getEmail();
