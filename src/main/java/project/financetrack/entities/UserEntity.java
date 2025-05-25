@@ -50,7 +50,7 @@ public class UserEntity extends BaseEntity {
 
     private Boolean premium = false;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<ProjectEntity> projects;
 
     public UserEntity(UserDTOPost dtoPost) {
