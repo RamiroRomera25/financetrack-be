@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import project.financetrack.controllers.genericSegregation.basicCRUD.ControllerGetById;
+import project.financetrack.controllers.genericSegregation.compositeUniqueAtt.ControllerGetAllByCompositeUniqueAtt;
 import project.financetrack.dtos.project.ProjectDTOPost;
 import project.financetrack.dtos.project.ProjectDTOPut;
 import project.financetrack.entities.ProjectEntity;
@@ -28,7 +29,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/projects")
 public class ProjectController
-implements ControllerGetById<ProjectEntity, Long, ProjectEntity, ProjectService>
+implements ControllerGetById<ProjectEntity, Long, ProjectEntity, ProjectService>,
+        ControllerGetAllByCompositeUniqueAtt<ProjectEntity, Long, ProjectEntity, ProjectService>
 {
 
     private final ProjectService projectService;

@@ -31,7 +31,8 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectEntity create(ProjectDTOPost dtoPost) {
         Map att = Map.of(
             "name", dtoPost.getName(),
-            "user.id", dtoPost.getUserId()
+            "user.id", dtoPost.getUserId(),
+            "isActive", true
         );
 
         if (ProjectService.super.getOptionalByCompositeUniqueFields(att).isPresent()) {
@@ -40,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         UserEntity user = this.userService.getByUniqueField("id", dtoPost.getUserId());
 
-        if (!user.getPremium() && user.getProjects().size() > 3) {
+        if (!user.getPremium() && user.getProjects().size() >= 3) {
             throw new IllegalArgumentException("To have more projects buy premium");
         }
 
