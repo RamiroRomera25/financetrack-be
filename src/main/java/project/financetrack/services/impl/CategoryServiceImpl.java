@@ -6,11 +6,14 @@ import org.springframework.stereotype.Service;
 import project.financetrack.dtos.category.CategoryDTO;
 import project.financetrack.dtos.category.CategoryDTOPost;
 import project.financetrack.entities.CategoryEntity;
+import project.financetrack.entities.ProjectEntity;
+import project.financetrack.entities.UserEntity;
 import project.financetrack.repositories.CategoryRepository;
 import project.financetrack.repositories.GenericRepository;
 import project.financetrack.repositories.specs.SpecificationBuilder;
 import project.financetrack.services.CategoryService;
 import project.financetrack.services.ProjectService;
+import project.financetrack.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final ProjectService projectService;
 
+    private final UserService userService;
+
     private final SpecificationBuilder<CategoryEntity> specificationBuilder;
 
     @Override
@@ -39,8 +44,15 @@ public class CategoryServiceImpl implements CategoryService {
             throw new IllegalArgumentException("Category name duplicate.");
         }
 
+        ProjectEntity project = this.projectService.getById(dtoPost.getProjectId());
+        UserEntity user = project.getUser();
+
+        if (!user.getPremium() && project.getCategories().size() >= 10) {
+            throw new IllegalArgumentException("To have more categories on this project buy premium");
+        }
+
         CategoryEntity category = CategoryEntity.builder()
-                .project(projectService.getById(dtoPost.getProjectId()))
+                .project(project)
                 .name(dtoPost.getName())
                 .color(dtoPost.getColor())
                 .build();
@@ -51,6 +63,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void importCategoriesToProject(Long projectSourceId, Long projectTargetId, Long userId) {
 
+    }
+
+    @Override
+    public CategoryEntity delete(Long id) {
+        CategoryEntity category = this.getById(id);
+        category.getTransactions()
+                .forEach(transactionEntity -> transactionEntity.setIsActive(false));
+        return CategoryService.super.delete(id);
     }
 
     @Override

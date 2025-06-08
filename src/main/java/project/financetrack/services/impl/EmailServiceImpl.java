@@ -102,8 +102,8 @@ public class EmailServiceImpl implements EmailService {
 
         variables.put("fullName", user.getFirstName() + " " + user.getLastName());
         variables.put("project.name", project.getName());
-        variables.put("maturity.quantity", reminder.getSubject());
-        variables.put("maturity.endDate", reminder.getReminderDate().format(DateTimeFormatter.ISO_DATE));
+        variables.put("subject", reminder.getSubject());
+        variables.put("reminderDate", reminder.getReminderDate().format(DateTimeFormatter.ISO_DATE));
 
         createEmailDTO.setVariables(variables);
         this.sendEmailWithTemplate(createEmailDTO);

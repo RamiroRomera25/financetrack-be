@@ -57,7 +57,7 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
         PreferenceItemRequest preferenceItemRequest = PreferenceItemRequest.builder()
                 .title("FinanceTrack Premium")
                 .quantity(1)
-                .unitPrice(BigDecimal.ONE)
+                .unitPrice(BigDecimal.valueOf(10000L))
                 .currencyId(CURRENCY)
                 .build();
 
