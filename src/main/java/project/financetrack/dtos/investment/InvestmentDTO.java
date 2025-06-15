@@ -11,7 +11,7 @@ public class InvestmentDTO {
     private Long id;
     private String tickerSymbol;
     private String name;
-    private Integer quantity;
+    private Double quantity;
     private Double price;
     private Double value;
     private Double change;

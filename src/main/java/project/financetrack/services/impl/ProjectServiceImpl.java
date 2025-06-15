@@ -84,4 +84,15 @@ public class ProjectServiceImpl implements ProjectService {
     public SpecificationBuilder<ProjectEntity> specificationBuilder() {
         return specificationBuilder;
     }
+
+    @Override
+    public boolean existsProjectWithName(String projectName, Long userId) {
+        Map att = Map.of(
+                "name", projectName,
+                "user.id", userId,
+                "isActive", true
+        );
+
+        return ProjectService.super.getOptionalByCompositeUniqueFields(att).isPresent();
+    }
 }

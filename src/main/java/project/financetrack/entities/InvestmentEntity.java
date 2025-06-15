@@ -30,7 +30,7 @@ public class InvestmentEntity extends BaseEntity {
 
     private String tickerSymbol;
 
-    private Integer quantity;
+    private Double quantity;
 
     @ManyToOne
     @JoinColumn

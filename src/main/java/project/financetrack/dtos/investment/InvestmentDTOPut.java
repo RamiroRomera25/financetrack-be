@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestmentDTOPut {
-    private Integer quantity;
+    private Double quantity;
 }

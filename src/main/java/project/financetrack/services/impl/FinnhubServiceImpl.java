@@ -79,7 +79,7 @@ public class FinnhubServiceImpl implements ExternalInvestmentService {
     /**
      * Verifica si un símbolo bursátil existe y devuelve sus datos
      */
-    public InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Integer quantity) throws IOException {
+    public InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Double quantity) throws IOException {
         // Verificar si el símbolo existe
 
         if (tickerSymbol.isBlank()) {

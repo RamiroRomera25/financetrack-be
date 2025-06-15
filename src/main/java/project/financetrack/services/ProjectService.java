@@ -13,6 +13,8 @@ import project.financetrack.services.genericSegregation.compositeUniqueAtt.Servi
 import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetAllByUniqueAtt;
 import project.financetrack.services.genericSegregation.uniqueAtt.ServiceGetByUniqueAtt;
 
+import java.util.List;
+
 @Service
 public interface ProjectService extends
         ServiceCreate<ProjectEntity, Long, ProjectEntity, ProjectDTOPost>,
@@ -24,4 +26,5 @@ public interface ProjectService extends
         ServiceUpdate<ProjectEntity, Long, ProjectEntity, ProjectDTOPut>,
         ServiceGetAllByCompositeUniqueAtt<ProjectEntity, Long, ProjectEntity>
 {
+    boolean existsProjectWithName(String projectName, Long userId);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import project.financetrack.controllers.genericSegregation.basicCRUD.ControllerGetById;
@@ -49,6 +50,14 @@ implements ControllerGetById<ProjectEntity, Long, ProjectEntity, ProjectService>
         Long userId = this.jwtService.extractId(auth);
 
         return ResponseEntity.ok(projectService.getAllByUniqueFields("user.id", userId));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Boolean> getAllProjectByUser(@RequestParam String projectName,
+                                                                   Authentication auth) {
+        Long userId = this.jwtService.extractId(auth);
+
+        return ResponseEntity.ok(projectService.existsProjectWithName(projectName, userId));
     }
 
     @PostMapping()

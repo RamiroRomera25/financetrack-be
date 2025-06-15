@@ -13,7 +13,7 @@ import project.financetrack.entities.base.BaseEntity;
 public class InvestmentDTOPost extends BaseEntity {
     private String tickerSymbol;
 
-    private Integer quantity;
+    private Double quantity;
 
     private Long projectId;
 }

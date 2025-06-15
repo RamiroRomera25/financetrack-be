@@ -8,6 +8,6 @@ import java.util.List;
 
 @Service
 public interface ExternalInvestmentService {
-    InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Integer quantity) throws IOException;
+    InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Double quantity) throws IOException;
     List<InvestmentDTO> completeInvestmentData(List<InvestmentDTO> investments) throws IOException;
 }

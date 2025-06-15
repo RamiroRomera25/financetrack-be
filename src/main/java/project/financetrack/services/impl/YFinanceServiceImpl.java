@@ -66,7 +66,7 @@ public class YFinanceServiceImpl implements ExternalInvestmentService {
      * @return Investment con los datos del símbolo si existe, null si no existe
      * @throws IOException Si hay problemas al consultar la API
      */
-    public InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Integer quantity) throws IOException {
+    public InvestmentDTO validateAndGetSymbolData(String tickerSymbol, Double quantity) throws IOException {
         Stock stock = YahooFinance.get(tickerSymbol);
 
         // Verificamos si el símbolo existe
