@@ -30,6 +30,7 @@ public class GoalServiceImpl implements GoalService {
                 .endDate(dtoPost.getEndDate())
                 .quantity(dtoPost.getQuantity())
                 .objective(dtoPost.getObjective())
+                .notes(dtoPost.getNotes())
                 .build();
 
         return GoalService.super.createWithEntity(goal);
