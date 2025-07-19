@@ -55,4 +55,14 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public boolean setFirstLoginFalse(UserEntity user) {
+        if (user.getFirstLogin()) {
+            user.setFirstLogin(false);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 }

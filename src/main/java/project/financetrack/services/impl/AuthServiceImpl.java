@@ -20,6 +20,8 @@ import project.financetrack.services.EmailService;
 import project.financetrack.services.ProjectService;
 import project.financetrack.services.UserService;
 
+import java.util.ArrayList;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -41,6 +43,15 @@ public class AuthServiceImpl implements AuthService {
         user.setIsActive(true);
         user.setPassword(passwordEncoder.encode(post.getPassword()));
         user.setPremium(false);
+        user.setFirstLogin(true);
+        user.setIsActive(true);
+        user.setProjects(new ArrayList<>());
+        user.getProjects().add(
+                ProjectEntity.builder()
+                .name("Proyecto Ejemplo")
+                .user(user)
+                .build()
+        );
 
         UserDTO userDTO = new UserDTO(userRepository.save(user));
 
@@ -58,9 +69,12 @@ public class AuthServiceImpl implements AuthService {
         );
         UserEntity user = userService.getOptionalByUniqueField("email", request.getEmail())
                 .orElseThrow();
+        boolean firstLogin = userService.setFirstLoginFalse(user);
         String accessToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
-        return new TokenResponse(accessToken, refreshToken, new UserDTO(user));
+        UserDTO userDTO = new UserDTO(user);
+        userDTO.setFirstLogin(firstLogin);
+        return new TokenResponse(accessToken, refreshToken, userDTO);
     }
 
     @Override

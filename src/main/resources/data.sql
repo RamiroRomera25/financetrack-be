@@ -1,13 +1,27 @@
 -- Insertar usuario
-INSERT INTO users (first_name, last_name, email, password, premium, created_date, last_updated_date, is_active)
+INSERT INTO users (first_name, last_name, email, password, premium, created_date, last_updated_date, is_active, first_login)
 VALUES (
            'Ramiro',
            'Romera',
            'ramiromera666@gmail.com',
-           '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+           '$2a$10$KNkrcW605ogsy.LRMvaZvuyRKBS.9dqQSjJaT2H02Y76YjXZlvYoe',
            false,
            '2025-01-15 10:30:00',
            '2025-01-15 10:30:00',
+           true,
+          false
+       );
+-- Insertar usuario
+INSERT INTO users (first_name, last_name, email, password, premium, created_date, last_updated_date, is_active, first_login)
+VALUES (
+           'Ramiro',
+           'Romera',
+           'ramiromera25@gmail.com',
+           '$2a$10$KNkrcW605ogsy.LRMvaZvuyRKBS.9dqQSjJaT2H02Y76YjXZlvYoe',
+           false,
+           '2025-01-15 10:30:00',
+           '2025-01-15 10:30:00',
+           true,
            true
        );
 

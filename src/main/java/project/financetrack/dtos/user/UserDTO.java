@@ -46,11 +46,14 @@ public class UserDTO {
 
     private boolean premium;
 
+    private boolean firstLogin;
+
     public UserDTO(UserEntity entity) {
         this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
         this.premium = entity.getPremium();
+        this.firstLogin = entity.getFirstLogin();
     }
 }

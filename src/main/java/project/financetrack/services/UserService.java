@@ -13,4 +13,6 @@ extends
         ServiceGetById<UserEntity, Long, UserDTO>
 {
     boolean setPremiumByUserId(Long userId);
+
+    boolean setFirstLoginFalse(UserEntity user);
 }

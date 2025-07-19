@@ -1,5 +1,6 @@
 package project.financetrack.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,7 +51,10 @@ public class UserEntity extends BaseEntity {
 
     private Boolean premium = false;
 
-    @OneToMany(mappedBy = "user")
+    private Boolean firstLogin;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ProjectEntity> projects;
 
     public UserEntity(UserDTOPost dtoPost) {
